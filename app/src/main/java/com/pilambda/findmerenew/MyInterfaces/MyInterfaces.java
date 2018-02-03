@@ -9,6 +9,11 @@ import android.view.View;
 public class MyInterfaces {
 
     public interface MyOnclickListener{
-        public void onclick(View view , int position);
+        void onclick(View view , int position);
+    }
+
+    //CODE 0 : UP
+    public interface ScroolingDelegate{
+        public void scroll(int code);
     }
 }

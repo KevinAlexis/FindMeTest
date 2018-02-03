@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FindMeRenew.iml" filepath="$PROJECT_DIR$/FindMeRenew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FindMeTest.iml" filepath="$PROJECT_DIR$/FindMeTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
