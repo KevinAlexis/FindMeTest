@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by qualtop on 27/01/18.
+ * Created by Alexis on 27/01/18.
  */
 
 public class MyConstants {
+
+    public static final String SMS_MESSAGE_RECEIVED = "SmsMessage";
 
     public static final String APPNAKME = "findMe";
     public static final String PREFERENCES = "preferences";

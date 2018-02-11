@@ -38,10 +38,10 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/editDialogCapturaNombre"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_above="@+id/editText3"
+                    android:layout_above="@+id/editDialogCapturaNumero"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginBottom="28dp"
@@ -52,12 +52,12 @@
                     android:hint="nombre de contacto" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/editDialogCapturaNumero"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_height="40dp"
-                    android:layout_above="@+id/button3"
+                    android:layout_above="@+id/buttonDialogContactoCancelar"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginBottom="36dp"
@@ -68,24 +68,24 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/button"
-                    android:layout_alignBottom="@+id/button"
+                    android:layout_alignBaseline="@+id/buttonDialogContactoAceptar"
+                    android:layout_alignBottom="@+id/buttonDialogContactoAceptar"
                     android:layout_marginEnd="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@+id/button"
-                    android:layout_toStartOf="@+id/button"
+                    android:layout_toLeftOf="@+id/buttonDialogContactoAceptar"
+                    android:layout_toStartOf="@+id/buttonDialogContactoAceptar"
                     android:background="@color/colorClear"
                     android:text="Cancelar"
                     android:textColor="#f92669"
-                    android:id="@+id/button3" />
+                    android:id="@+id/buttonDialogContactoCancelar" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/buttonDialogContactoAceptar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/editText3"
+                    android:layout_alignEnd="@+id/editDialogCapturaNumero"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignRight="@+id/editText3"
+                    android:layout_alignRight="@+id/editDialogCapturaNumero"
                     android:layout_marginBottom="14dp"
                     android:background="@color/colorClear"
                     android:text="Aceptar"

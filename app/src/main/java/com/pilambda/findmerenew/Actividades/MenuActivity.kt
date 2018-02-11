@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
-
 import com.pilambda.findmerenew.Fragments.ConfiguracionFragment
 import com.pilambda.findmerenew.Fragments.HomeFragment
-import com.pilambda.findmerenew.MyConstants.MyConstants
 import com.pilambda.findmerenew.R
 
 /***
@@ -41,6 +37,9 @@ class MenuActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mManager = supportFragmentManager
         mFragmentConfiguracion = ConfiguracionFragment()
         mFragmentMenu = HomeFragment()
+        val transaction = mManager!!.beginTransaction()
+        transaction.replace(R.id.fragment_container_menu,mFragmentMenu)
+        transaction.commit()
         mTextMessage = findViewById(R.id.message)
         mNavigation = findViewById(R.id.navigation)
         mNavigation?.setOnNavigationItemSelectedListener(this)

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.pilambda.findmerenew.CustomViews.LetterTileProvider;
 import com.pilambda.findmerenew.Model.Contacto;
@@ -40,7 +41,7 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
     @Override
     public void onBindViewHolder(ContactosViewHolder holder, int position) {
         Contacto contacto = mContactos.get(position);
-        //holder.mTextNombre.setText(contacto.getNombre());
+        holder.mTextNombre.setText(contacto.getNombre());
         LetterTileProvider letterTileProvider = new LetterTileProvider(mContext);
         final Resources resources = mContext.getResources();
         final int tileSize = resources.getDimensionPixelSize(R.dimen.letter_tile_size);
@@ -62,12 +63,12 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
 
     public class ContactosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        //private final TextView mTextNombre;
+        private final TextView mTextNombre;
         //private final CircleImageView mImageContacto;
 
         public ContactosViewHolder(View itemView) {
             super(itemView);
-            //mTextNombre = itemView.findViewById(R.id.textUserContact);
+            mTextNombre = itemView.findViewById(R.id.textContactoName);
             //mImageContacto = itemView.findViewById(R.id.image_userImage);
             itemView.setOnClickListener(this);
         }

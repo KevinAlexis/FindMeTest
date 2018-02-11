@@ -1,6 +1,8 @@
 package com.pilambda.findmerenew.Fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,7 +21,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
 
     private Button mButtonLogOut;
-
+    private SharedPreferences mPreferences;
     public ConfiguracionFragment() {
     }
 
@@ -38,6 +40,10 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         switch (id){
             case R.id.button_logOut:
                 Log.i(MyConstants.APPNAKME,"logOutPressed");
+                mPreferences = getActivity().getSharedPreferences(MyConstants.PREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean(MyConstants.PREF_IS_USER_LOGGED,false);
+                editor.commit();
                 getActivity().finish();
                 break;
         }

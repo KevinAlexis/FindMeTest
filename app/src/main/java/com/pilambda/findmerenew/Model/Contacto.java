@@ -1,10 +1,12 @@
 package com.pilambda.findmerenew.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Alexis on 1/26/2018.
  */
 
-public class Contacto {
+public class Contacto implements Serializable{
     private String mNombre;
     private String mTelefono;
     private String mPhoto;
