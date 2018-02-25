@@ -12,6 +12,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import com.pilambda.findmerenew.MyConstants.MyConstants;
+import com.pilambda.findmerenew.Services.MyBackGroundService;
 
 /**
  * Created by Alexis on 2/10/2018.
@@ -50,6 +51,7 @@ public class MySmsReceiber extends BroadcastReceiver {
                         Log.i(MyConstants.APPNAKME,"Hello SMS");
                         Intent newIntent = new Intent("android.provider.action.SmsReceiver");
                         newIntent.putExtra(MyConstants.SMS_MESSAGE_RECEIVED, msgBody);
+
                         context.sendBroadcast(newIntent);
                     }
                 }catch(Exception e){
@@ -58,6 +60,5 @@ public class MySmsReceiber extends BroadcastReceiver {
             }
 
         }
-
     }
 }

@@ -1,4 +1,4 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -55,5 +55,17 @@
 
     </android.support.v7.widget.CardView>
 
+    <Button
+        android:id="@+id/button_emergency"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/cardViewUsuario"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/view_border_rounded"
+        android:text="Emergency"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlue" />
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

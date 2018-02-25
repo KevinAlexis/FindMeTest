@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.pilambda.findmerenew.Model.Contacto;
+
 import static com.pilambda.findmerenew.DataBase.DBConstants.DATABASENAME;
 import static com.pilambda.findmerenew.DataBase.DBConstants.TABLE_PULSERAS;
 import static com.pilambda.findmerenew.DataBase.DBConstants.TABLE_PULSERAS_Foto;
@@ -40,6 +42,10 @@ public class DBManager {
         values.put(TABLE_PULSERAS_NOMBRE, name);
         int id = (int) database.insert(TABLE_PULSERAS, null, values);
         return id;
+    }
+
+    public Contacto getAllContacts(){
+        return null;
     }
 
     private static class DBHelper extends SQLiteOpenHelper{

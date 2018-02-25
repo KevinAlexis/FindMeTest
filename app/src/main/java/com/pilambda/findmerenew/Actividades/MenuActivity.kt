@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import android.widget.Toolbar
 import com.pilambda.findmerenew.Fragments.ConfiguracionFragment
 import com.pilambda.findmerenew.Fragments.HomeFragment
 import com.pilambda.findmerenew.R
+import com.pilambda.findmerenew.R.id.toolbarMenu
 
 /***
  * @author Kevin Alexis
@@ -34,6 +37,8 @@ class MenuActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        val toolBar = findViewById<android.support.v7.widget.Toolbar?>(R.id.toolbarMenu)
+        setSupportActionBar(toolBar)
         mManager = supportFragmentManager
         mFragmentConfiguracion = ConfiguracionFragment()
         mFragmentMenu = HomeFragment()
@@ -43,6 +48,7 @@ class MenuActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mTextMessage = findViewById(R.id.message)
         mNavigation = findViewById(R.id.navigation)
         mNavigation?.setOnNavigationItemSelectedListener(this)
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
