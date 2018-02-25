@@ -29,6 +29,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private ContactosFragment contactosFragment;
     private DialogNuevoContacto dialogNuevoContacto;
     private DBManager mDBManager;
+    //si la animacion esta activa
+    private boolean isAnimationStarted = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         mButtonAddContact.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setTitle("");
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         contactosFragment = new ContactosFragment();
@@ -60,15 +62,33 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             contactosFragment = (ContactosFragment) getSupportFragmentManager().findFragmentByTag("myTag");
             Animation animation = new TranslateAnimation(0, 0, 0, 500);
             animation.setDuration(1000);
-            animation.setFillAfter(true);
             mButtonAddContact.startAnimation(animation);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    Log.i(MyConstants.APPNAKME,"onAnim Start");
+                    if (isAnimationStarted){
+                        mButtonAddContact.setAnimation(null);
+                    }
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    Log.i(MyConstants.APPNAKME,"onAnim End");
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
             mButtonAddContact.setVisibility(View.INVISIBLE);
 
         } else {
-            Animation animation = new TranslateAnimation(0, 0, 200, 0);
-            animation.setDuration(1000);
+            Animation animation = new TranslateAnimation(0, 0, 500, 0);
+            animation.setDuration(800);
             animation.setFillAfter(true);
             mButtonAddContact.startAnimation(animation);
+
             mButtonAddContact.setVisibility(View.VISIBLE);
         }
     }

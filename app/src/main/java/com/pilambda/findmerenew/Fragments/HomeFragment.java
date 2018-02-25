@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 public class HomeFragment extends Fragment {
 
     private TextView mTextViewTest;
+    private CardView mCardView;
 
     public HomeFragment() {
 
@@ -35,7 +37,16 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mTextViewTest = view.findViewById(R.id.textViewTest);
+        mTextViewTest = view.findViewById(R.id.textViewNombreContactoCurrent);
+        mCardView = view.findViewById(R.id.cardViewUsuario);
+        mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+        mTextViewTest.setText("Nombre");
         return view;
     }
 

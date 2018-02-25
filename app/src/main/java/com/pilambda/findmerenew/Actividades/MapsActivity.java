@@ -26,7 +26,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-         myCoordinates = (MyCoordinates) getIntent().getSerializableExtra(CORDENADAS_JSON);
+        if (getIntent().hasExtra(CORDENADAS_JSON)){
+            myCoordinates = (MyCoordinates) getIntent().getSerializableExtra(CORDENADAS_JSON);
+        }
+
         mapFragment.getMapAsync(this);
     }
 
@@ -34,8 +37,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng myCurrentLocation = new LatLng(myCoordinates.getLatitud(), myCoordinates.getLongitud());
-        mMap.addMarker(new MarkerOptions().position(myCurrentLocation).title("Hola Esime!!!"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myCurrentLocation));
+        double latitud = 19.436270;
+        double longitud = -99.212196;
+        LatLng coordenadaPrueba = new LatLng(latitud,longitud);
+        mMap.addMarker(new MarkerOptions().position(coordenadaPrueba).title("Esta es una prueba"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadaPrueba,15));
+
+        if (myCoordinates != null){
+            LatLng myCurrentLocation = new LatLng(myCoordinates.getLatitud(), myCoordinates.getLongitud());
+            mMap.addMarker(new MarkerOptions().position(myCurrentLocation).title("Hola Esime!!!"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myCurrentLocation,15));
+
+        }
     }
 }
