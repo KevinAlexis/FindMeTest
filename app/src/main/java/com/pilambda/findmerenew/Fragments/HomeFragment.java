@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ import java.net.URL;
 /**
  *@author Kevin Alexis
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private TextView mTextViewTest;
     private CardView mCardView;
@@ -52,12 +53,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mTextViewTest = view.findViewById(R.id.textViewNombreContactoCurrent);
         mButtonEmergency = view.findViewById(R.id.button_emergency);
-        mButtonEmergency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setNotification();
-            }
-        });
+        mButtonEmergency.setOnClickListener(this);
         mCardView = view.findViewById(R.id.cardViewUsuario);
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +66,20 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getActivity(), MyBackGroundService.class);
         getActivity().startService(intent);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.button_emergency:
+                final String body = "SOS";
+                final String number = "5574222007";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, body, null, null);
+                Log.i(MyConstants.APPNAKME,"SMS enviado PS: I`m awesome anyway :)");
+                break;
+        }
     }
 
     @Override
