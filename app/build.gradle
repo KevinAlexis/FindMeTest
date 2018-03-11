@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.dynatrace.tools.android'
+
+dynatrace {
+    defaultConfig {
+        applicationId '40bf89d2-3471-414e-a07a-d88f94ea23d8'
+        environmentId 'bf01906qwb'
+        cluster 'https://bf.dynatrace.com'
+    }
+}
 
 android {
     compileSdkVersion 26
@@ -37,4 +46,15 @@ dependencies {
 }
 repositories {
     mavenCentral()
+
 }
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dynatrace.tools:android:+'
+    }
+}
+apply plugin: 'kotlin-android-extensions'

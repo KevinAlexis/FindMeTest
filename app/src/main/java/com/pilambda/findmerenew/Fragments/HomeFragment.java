@@ -27,6 +27,7 @@ import com.pilambda.findmerenew.Actividades.MenuActivity;
 import com.pilambda.findmerenew.Actividades.RegistroActivity;
 import com.pilambda.findmerenew.Model.MyCoordinates;
 import com.pilambda.findmerenew.MyConstants.MyConstants;
+import com.pilambda.findmerenew.MyConstants.UtilFunctions;
 import com.pilambda.findmerenew.R;
 import com.pilambda.findmerenew.Services.MyBackGroundService;
 
@@ -34,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *@author Kevin Alexis
@@ -100,7 +103,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         @Override
         public void onReceive(Context context, Intent intent) {
             String coordenadasError = intent.getStringExtra(MyConstants.SMS_MESSAGE_RECEIVED);
-            String coordenadas = coordenadasError.substring(3,coordenadasError.length());
+            //String coordenadas = coordenadasError.substring(3,coordenadasError.length());
+            String coordenadas = UtilFunctions.
+                    corrigeErrorTransmisionGsm(coordenadasError);
             Log.i(MyConstants.APPNAKME,"hello from fragment" + coordenadas);
             MyCoordinates myCoordinates = new MyCoordinates();
             try {
@@ -135,4 +140,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         notificationManager.notify(0, n);
     }
+
 }
