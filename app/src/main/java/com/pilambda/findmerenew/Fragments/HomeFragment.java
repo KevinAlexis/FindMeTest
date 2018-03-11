@@ -8,11 +8,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -21,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pilambda.findmerenew.Actividades.MapsActivity;
 import com.pilambda.findmerenew.Actividades.MenuActivity;
@@ -46,6 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private TextView mTextViewTest;
     private CardView mCardView;
     private Button mButtonEmergency;
+    private boolean isButtonChanged = false;
 
     public HomeFragment() {
 
@@ -78,9 +86,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             case R.id.button_emergency:
                 final String body = "SOS";
                 final String number = "5574222007";
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, body, null, null);
+                //SmsManager smsManager = SmsManager.getDefault();
+                //smsManager.sendTextMessage(number, null, body, null, null);
+                isButtonChanged = !isButtonChanged;
                 Log.i(MyConstants.APPNAKME,"SMS enviado PS: I`m awesome anyway :)");
+                Toast.makeText(getActivity(),"Mensaje enviado",Toast.LENGTH_SHORT).show();
+                changeButtonColor();
                 break;
         }
     }
@@ -139,6 +150,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         NotificationManager notificationManager =(NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, n);
+    }
+
+    public void changeButtonColor(){
+        if (isButtonChanged){
+            Drawable drawable = getActivity().getResources().getDrawable(R.drawable.view_border_rounded);
+            drawable = DrawableCompat.wrap(drawable);
+            int color = getActivity().getResources().getColor(R.color.colorYellow);
+            DrawableCompat.setTint(drawable,color);
+            mButtonEmergency.setBackground(drawable);
+            mButtonEmergency.setTextColor(color);
+        }else {
+            Drawable drawable = getActivity().getResources().getDrawable(R.drawable.view_border_rounded);
+            drawable = DrawableCompat.wrap(drawable);
+            int color = getActivity().getResources().getColor(R.color.colorAccent);
+            DrawableCompat.setTint(drawable,color);
+            mButtonEmergency.setBackground(drawable);
+            mButtonEmergency.setTextColor(color);
+
+        }
+
+
+    }
+
+    public static Drawable setTint(Drawable drawable, int color) {
+        final Drawable newDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(newDrawable, color);
+        return newDrawable;
     }
 
 }
