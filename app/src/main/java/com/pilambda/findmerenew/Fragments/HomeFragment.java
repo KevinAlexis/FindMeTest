@@ -38,6 +38,7 @@ import com.pilambda.findmerenew.MyConstants.UtilFunctions;
 import com.pilambda.findmerenew.R;
 import com.pilambda.findmerenew.Services.MyBackGroundService;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,8 +75,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
         mTextViewTest.setText("Nombre");
+        //Iniciando el proceso en backgroun, jaja fue maás fácil de lo que creí
         Intent intent = new Intent(getActivity(), MyBackGroundService.class);
         getActivity().startService(intent);
+
+
         return view;
     }
 
@@ -85,7 +89,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         switch (id){
             case R.id.button_emergency:
                 final String body = "SOS";
-                final String number = "5574222007";
+                final String number = "5564144780";
                 //SmsManager smsManager = SmsManager.getDefault();
                 //smsManager.sendTextMessage(number, null, body, null, null);
                 isButtonChanged = !isButtonChanged;
@@ -115,8 +119,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         public void onReceive(Context context, Intent intent) {
             String coordenadasError = intent.getStringExtra(MyConstants.SMS_MESSAGE_RECEIVED);
             //String coordenadas = coordenadasError.substring(3,coordenadasError.length());
-            String coordenadas = UtilFunctions.
-                    corrigeErrorTransmisionGsm(coordenadasError);
+            String coordenadas = UtilFunctions.corrigeErrorTransmisionGsm(coordenadasError);
             Log.i(MyConstants.APPNAKME,"hello from fragment" + coordenadas);
             MyCoordinates myCoordinates = new MyCoordinates();
             try {
@@ -169,8 +172,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             mButtonEmergency.setTextColor(color);
 
         }
-
-
     }
 
     public static Drawable setTint(Drawable drawable, int color) {
