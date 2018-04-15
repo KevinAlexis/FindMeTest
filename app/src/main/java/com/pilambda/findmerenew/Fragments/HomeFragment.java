@@ -46,10 +46,12 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.pilambda.findmerenew.Actividades.MapsActivity.CORDENADAS_JSON;
+
 /**
- *@author Kevin Alexis
+ * @author Kevin Alexis
  */
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private TextView mTextViewTest;
     private CardView mCardView;
@@ -70,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),MapsActivity.class);
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,6 +80,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //Iniciando el proceso en backgroun, jaja fue maás fácil de lo que creí
         Intent intent = new Intent(getActivity(), MyBackGroundService.class);
         getActivity().startService(intent);
+        //JAJAJAJ soy bien chingón
+        if (getActivity().getIntent().hasExtra(CORDENADAS_JSON)) {
+            MyCoordinates myCoordinates = (MyCoordinates) getActivity().getIntent().getSerializableExtra(CORDENADAS_JSON);
+            Intent mapsActivity = new Intent(getActivity(), MapsActivity.class);
+            mapsActivity.putExtra(CORDENADAS_JSON, myCoordinates);
+            startActivity(mapsActivity);
+        }
 
 
         return view;
@@ -86,15 +95,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id){
+        switch (id) {
             case R.id.button_emergency:
                 final String body = "SOS";
                 final String number = "5564144780";
-                //SmsManager smsManager = SmsManager.getDefault();
-                //smsManager.sendTextMessage(number, null, body, null, null);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, body, null, null);
                 isButtonChanged = !isButtonChanged;
-                Log.i(MyConstants.APPNAKME,"SMS enviado PS: I`m awesome anyway :)");
-                Toast.makeText(getActivity(),"Mensaje enviado",Toast.LENGTH_SHORT).show();
+                Log.i(MyConstants.APPNAKME, "SMS enviado PS: I`m awesome anyway :)");
+                Toast.makeText(getActivity(), "Mensaje enviado", Toast.LENGTH_SHORT).show();
                 changeButtonColor();
                 break;
         }
@@ -120,16 +129,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             String coordenadasError = intent.getStringExtra(MyConstants.SMS_MESSAGE_RECEIVED);
             //String coordenadas = coordenadasError.substring(3,coordenadasError.length());
             String coordenadas = UtilFunctions.corrigeErrorTransmisionGsm(coordenadasError);
-            Log.i(MyConstants.APPNAKME,"hello from fragment" + coordenadas);
+            Log.i(MyConstants.APPNAKME, "hello from fragment" + coordenadas);
             MyCoordinates myCoordinates = new MyCoordinates();
             try {
                 JSONObject jsonObject = new JSONObject(coordenadas);
-                Log.i(MyConstants.APPNAKME,jsonObject.toString());
+                Log.i(MyConstants.APPNAKME, jsonObject.toString());
                 myCoordinates.setLatitud(jsonObject.getDouble("lat"));
                 myCoordinates.setLongitud(jsonObject.getDouble("lon"));
                 mTextViewTest.setText("latitud:" + myCoordinates.getLatitud() + "longitud" + myCoordinates.getLongitud());
                 Intent mapsActivity = new Intent(getActivity(), MapsActivity.class);
-                mapsActivity.putExtra(MapsActivity.CORDENADAS_JSON,myCoordinates);
+                mapsActivity.putExtra(CORDENADAS_JSON, myCoordinates);
                 startActivity(mapsActivity);
                 setNotification();
             } catch (JSONException e) {
@@ -142,32 +151,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private void setNotification() {
         Intent intent = new Intent(getActivity(), MenuActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(getActivity(), (int) System.currentTimeMillis(), intent, 0);
-        Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Notification n  = new Notification.Builder(getActivity())
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Notification n = new Notification.Builder(getActivity())
                 .setContentTitle("Hiii!!!")
                 .setContentText(":p")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
                 .setSound(uri)
                 .setAutoCancel(true).build();
-        NotificationManager notificationManager =(NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, n);
     }
 
-    public void changeButtonColor(){
-        if (isButtonChanged){
+    public void changeButtonColor() {
+        if (isButtonChanged) {
             Drawable drawable = getActivity().getResources().getDrawable(R.drawable.view_border_rounded);
             drawable = DrawableCompat.wrap(drawable);
             int color = getActivity().getResources().getColor(R.color.colorYellow);
-            DrawableCompat.setTint(drawable,color);
+            DrawableCompat.setTint(drawable, color);
             mButtonEmergency.setBackground(drawable);
             mButtonEmergency.setTextColor(color);
-        }else {
+        } else {
             Drawable drawable = getActivity().getResources().getDrawable(R.drawable.view_border_rounded);
             drawable = DrawableCompat.wrap(drawable);
             int color = getActivity().getResources().getColor(R.color.colorAccent);
-            DrawableCompat.setTint(drawable,color);
+            DrawableCompat.setTint(drawable, color);
             mButtonEmergency.setBackground(drawable);
             mButtonEmergency.setTextColor(color);
 
